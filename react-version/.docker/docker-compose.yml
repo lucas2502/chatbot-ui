@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:23.0.0
+    container_name: keycloak
+    ports:
+      - "8080:8080"
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    command: start-dev
+
+  oauth-api:
+    image: node:20-alpine # ou qualquer outra imagem base que quiser
+    container_name: oauth-api
+    environment:
+      - KEYCLOAK_SERVER_URL=http://keycloak:8080
+      - KEYCLOAK_REALM=DEV
+      - CLIENT_ID=oauth-api
+      - CLIENT_SECRET=ahmrRqvAKyLroA0p26DWVF0gztBqHrRA
+    depends_on:
+      - keycloak
+    command: sh -c "while true; do echo 'Container pronto com as variáveis definidas'; sleep 3600; done"

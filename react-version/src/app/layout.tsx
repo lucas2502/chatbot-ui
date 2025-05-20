@@ -5,6 +5,8 @@
 import "./globals.css";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
+import { SessionProvider } from "next-auth/react";
+import LogoutButton from "./components/LogoutButton";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -46,7 +48,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <MantineProvider withGlobalStyles withNormalizeCSS>
-          {children}
+          <SessionProvider>
+            <LogoutButton></LogoutButton>
+            {children}
+          </SessionProvider>
         </MantineProvider>
       </body>
     </html>
