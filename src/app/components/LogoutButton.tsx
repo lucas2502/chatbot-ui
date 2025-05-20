@@ -20,8 +20,22 @@ export default function LogoutButton() {
     window.location.href = logoutUrl;
   };
   return session ? (
-    <Button variant="outline" color="red" onClick={handleLogout}>
-      Sair
+    <Button
+      variant="outline"
+      color="red"
+      onClick={handleLogout}
+      title="Sair"
+      style={{
+        position: "fixed",
+        bottom: "16px",
+        right: "16px",
+        fontSize: "40px",
+        backgroundColor: "transparent",
+        border: "none",
+        cursor: "pointer",
+      }}
+    >
+      🚪
     </Button>
   ) : null;
 }
